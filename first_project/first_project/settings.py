@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3d apps
     'djrichtextfield',
+    'rest_framework',
+    'drf_yasg',
+
     # my app
     'catalog',
     'payments',
