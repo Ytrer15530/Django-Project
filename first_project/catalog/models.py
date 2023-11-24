@@ -29,7 +29,6 @@ class Category(DateTimeStamp):
     url = models.URLField('url', blank=True)
     email = models.EmailField('email', blank=True)
     activate = models.BooleanField('Active', default=False)
-    tags = models.ManyToManyField(Tag, related_name="category_tag")
 
     class Meta:
         verbose_name = "Category"
@@ -43,9 +42,11 @@ class Category(DateTimeStamp):
 class Goods(DateTimeStamp):
     name = models.CharField("Category name", max_length=25, unique=True)
     description = RichTextField("Desc", blank=True)
+    price = models.FloatField('Price', default=0)
     activate = models.BooleanField('Active', default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='goods')
     image = models.ImageField('Image', upload_to='image', blank=True)
+    tags = models.ManyToManyField(Tag, related_name="goods_tag")
 
     class Meta:
         verbose_name = "Goods"

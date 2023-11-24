@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'djrichtextfield',
     'rest_framework',
     'drf_yasg',
-
+    'debug_toolbar',
     # my app
     'catalog',
     'payments',
@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'first_project.urls'
@@ -147,3 +148,17 @@ DJRICHTEXTFIELD_CONFIG = {
     }
 }
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+REST_FRAMEWORK ={
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute',
+        'user': '10/minute'
+    }
+}

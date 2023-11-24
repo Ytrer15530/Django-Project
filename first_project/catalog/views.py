@@ -9,7 +9,7 @@ today = date.today()
 
 class CategoryViews(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
-    queryset = Category.objects.filter(activate=True).order_by('id')
+    queryset = Category.objects.filter(activate=True).order_by('id').prefetch_related('goods')
 
 
 class TagViews(viewsets.ModelViewSet):
@@ -19,4 +19,4 @@ class TagViews(viewsets.ModelViewSet):
 
 class GoodsViews(viewsets.ModelViewSet):
     serializer_class = GoodsSerializer
-    queryset = Goods.objects.filter(activate=True).order_by('id')
+    queryset = Goods.objects.filter(activate=True).order_by('id').prefetch_related('tags')
