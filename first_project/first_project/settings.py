@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 3d apps
     'djrichtextfield',
     'rest_framework',
+    'django_filters',
     'drf_yasg',
     'debug_toolbar',
     # my app
@@ -160,5 +161,7 @@ REST_FRAMEWORK ={
     'DEFAULT_THROTTLE_RATES': {
         'anon': '5/minute',
         'user': '10/minute'
-    }
+    },
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5
 }

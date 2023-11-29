@@ -39,6 +39,17 @@ class Category(DateTimeStamp):
         return self.name
 
 
+class Parametr(models.Model):
+    name = models.CharField('Good param', max_length=25, unique=True)
+
+    class Meta:
+        verbose_name = 'Good param'
+        verbose_name_plural = 'Good params'
+
+    def __str__(self):
+        return self.name
+
+
 class Goods(DateTimeStamp):
     name = models.CharField("Category name", max_length=25, unique=True)
     description = RichTextField("Desc", blank=True)
@@ -47,6 +58,7 @@ class Goods(DateTimeStamp):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='goods')
     image = models.ImageField('Image', upload_to='image', blank=True)
     tags = models.ManyToManyField(Tag, related_name="goods_tag")
+    parametr = models.ForeignKey(Parametr, on_delete=models.CASCADE, related_name='parametr', null=True, blank=True)
 
     class Meta:
         verbose_name = "Goods"

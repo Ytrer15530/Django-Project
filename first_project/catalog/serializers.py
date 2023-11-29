@@ -10,10 +10,12 @@ class TagSerializer(serializers.ModelSerializer):
 
 class GoodsSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
+    # category = serializers.CharField(source='category_name')
 
     class Meta:
         model = Goods
-        fields = ['id', 'name', 'description', 'price', 'activate', 'created', 'image', 'tags']
+        fields = ['id', 'name', 'description', 'price', 'activate', 'created', 'image', 'tags', 'category',
+                  'parametr']
 
 
 class CategorySerializer(serializers.ModelSerializer):
