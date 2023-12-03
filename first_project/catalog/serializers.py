@@ -10,12 +10,21 @@ class TagSerializer(serializers.ModelSerializer):
 
 class GoodsSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
-    # category = serializers.CharField(source='category_name')
+    category = serializers.CharField(source='category.name')
+    # parametr = serializers.CharField(source='parametr.name')
 
     class Meta:
         model = Goods
         fields = ['id', 'name', 'description', 'price', 'activate', 'created', 'image', 'tags', 'category',
                   'parametr']
+
+
+    def get_parametr(self,goods):
+        try:
+            parametr_name = goods.parametr.name
+            return parametr_name
+        except Exception:
+            return 'no name'
 
 
 class CategorySerializer(serializers.ModelSerializer):

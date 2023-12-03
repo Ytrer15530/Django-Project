@@ -6,7 +6,7 @@ from rest_framework import filters
 from .models import Category, Goods, Tag
 from .serializers import CategorySerializer, TagSerializer, GoodsSerializer
 from .filters import GoodsFilter
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from datetime import date
 today = date.today()
@@ -15,7 +15,7 @@ today = date.today()
 class CategoryViews(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.filter(activate=True).order_by('id').prefetch_related('goods', 'goods__tags')
-
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class TagViews(viewsets.ModelViewSet):
     serializer_class = TagSerializer

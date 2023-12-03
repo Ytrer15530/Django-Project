@@ -1,14 +1,15 @@
 import requests
 
-URL = 'http://127.0.0.1:8000/api/category/?format=json'
+URL = "http://127.0.0.1:8000/api/goods/?format=json"
+JWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAxODY3Mjk4LCJpYXQiOjE3MDE0MzUyOTgsImp0aSI6ImQ5NTE1ZGNlNDIyZDQ3ODA5YWMxYTE3Yzg2NGEwYjBiIiwidXNlcl9pZCI6MX0.0pvK8lcHUN37PJKgrW_HBgalg187E0a2xDlTyeTWiyI'
 
 
 def get_category():
-    req = requests.get(URL)
-    print(f"status code {req.status_code}")
+    req = requests.get(URL, headers={'Authorization': f'Bearer {JWT}'})
+    print(req.json())
     if req.status_code == 200:
         for item in req.json():
-            print(item['name'])
+            print(item)
 
 
 get_category()
