@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} Category Delete {% endblock %}
+
+{% block content %}
+<div class="container">
+    <form method="post">{% csrf_token %}
+
+<p>Are you sure you want to delete "{{ object }}"?</p>
+
+        <input class="btn btn-danger" type="submit" value="Confirm">
+    </form>
+
+</div>
+{% endblock %}

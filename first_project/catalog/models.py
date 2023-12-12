@@ -38,6 +38,8 @@ class Category(DateTimeStamp):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return f"/category_detail/{self.pk}/"
 
 class Parametr(models.Model):
     name = models.CharField('Good param', max_length=25, unique=True)
@@ -67,3 +69,6 @@ class Goods(DateTimeStamp):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self,):
+        return f'/category-list'

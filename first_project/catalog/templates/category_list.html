@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Category list {% endblock %}
+
+{% block content %}
+<div class="container">
+<h1>Category</h1>
+{% for category in object_list %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">{{ category.name }} </h5>
+        <p class="card-text"> {{ category.description|safe }} </p>
+        <a href="/category_detail/{{ category.id }}/" class="card-link btn btn-success">{{ category.name }}</a>
+        <a href="/category_delete/{{ category.id }}/" class="card-link btn btn-danger">Delete</a>
+    </div>
+</div>
+
+{% empty %}
+    <li>No Category yet.</li>
+{% endfor%}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="?page=1">1</a> </li>
+         <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+         <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+        </ul>
+    </nav>
+    <a class="btn btn-primary" href="category-create" role="button">Create category</a>
+</div>
+{% endblock%}

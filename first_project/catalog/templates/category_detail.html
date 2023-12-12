@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Category Detail {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ object.name }} Goods: {{ count }}</h1>
+    {% for good in object.goods.all %}
+    <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ good.name }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{ good.description|safe }}</h6>
+    <p class="card-text">{{ good.price }}</p>
+    <a href="/goods_update/{{ good.id }}/" class="card-link btn btn-primary">Edit Good</a>
+  </div>
+</div>
+    {% endfor %}
+
+    <a class="btn btn-warning" href='{% url "category-update" object.pk %}'> Edit Category</a>
+</div>
+{% endblock%}

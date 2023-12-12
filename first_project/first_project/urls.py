@@ -19,7 +19,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from catalog.views import CategoryViews, TagViews, GoodsViews
+from catalog.views import (CategoryViews, TagViews, GoodsViews, HelloViews, CategoryListViews, CategoryDetailView,
+CategoryCreateView, CategoryUpdateView, CategoryDeleteView, GoodsUpdateView)
 from payments.views import PaymentViews
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -52,6 +53,15 @@ urlpatterns = [
     path('api/tags', TagViews.as_view({'get': 'list'})),
     path('api-auth/', include('rest_framework.urls')),
     path('djrichtextfield/', include('djrichtextfield.urls')),
+
+    path('', HelloViews.as_view(), name='hello'),
+    path('category-list', CategoryListViews.as_view(), name='category-list'),
+    path("category_detail/<int:pk>/", CategoryDetailView.as_view(), name='category-detail'),
+    path("category-create", CategoryCreateView.as_view(), name='category-create'),
+    path("category-update/<int:pk>/", CategoryUpdateView.as_view(), name='category-update'),
+    path("category_delete/<int:pk>/", CategoryDeleteView.as_view(), name='category_delete'),
+    path("goods_update/<int:pk>/", GoodsUpdateView.as_view(), name='goods_update'),
+
     path('doc/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path("__debug__/", include("debug_toolbar.urls")),

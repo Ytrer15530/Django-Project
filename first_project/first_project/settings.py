@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'debug_toolbar',
     'rest_framework_simplejwt',
+    'crispy_forms',
+    'crispy_bootstrap5',
     # my app
     'catalog',
     'payments',
@@ -189,3 +191,7 @@ CACHES = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
