@@ -21,7 +21,7 @@ today = date.today()
 class CategoryViews(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.filter(activate=True).order_by('id').prefetch_related('goods', 'goods__tags')
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
 
 class TagViews(viewsets.ModelViewSet):
     serializer_class = TagSerializer
@@ -34,7 +34,7 @@ class GoodsViews(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['name']
     filterset_class = GoodsFilter
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     @method_decorator(cache_page(60 * 2))
     def dispatch(self, request, *args, **kwargs):

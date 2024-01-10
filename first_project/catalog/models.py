@@ -1,5 +1,6 @@
 from django.db import models
 from djrichtextfield.models import RichTextField
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class DateTimeStamp(models.Model):
@@ -23,8 +24,9 @@ class Tag(models.Model):
         return self.name
 
 
-class Category(DateTimeStamp):
+class Category(DateTimeStamp, MPTTModel):
     name = models.CharField("Category name", max_length=25, unique=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     description = RichTextField("Desc", blank=True)
     url = models.URLField('url', blank=True)
     email = models.EmailField('email', blank=True)
@@ -33,7 +35,9 @@ class Category(DateTimeStamp):
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = 'Categories'
-        ordering = ['name']
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
     def __str__(self):
         return self.name
@@ -53,7 +57,7 @@ class Parametr(models.Model):
 
 
 class Goods(DateTimeStamp):
-    name = models.CharField("Category name", max_length=25, unique=True)
+    name = models.CharField("Category name", max_length=100, unique=True)
     description = RichTextField("Desc", blank=True)
     price = models.FloatField('Price', default=0)
     activate = models.BooleanField('Active', default=False)

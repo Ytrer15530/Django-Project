@@ -12,4 +12,18 @@ def get_category():
             print(item)
 
 
-get_category()
+json = [{
+    "id": 100,
+    "name": "bimba"
+},
+{
+    "id": 102,
+    "name": "bimba2"
+}]
+
+for item in json:
+    print(item['name'])
+
+list_name = [item['name'] for item in json]
+
+Parametr.objects.bulk_create(list_name)

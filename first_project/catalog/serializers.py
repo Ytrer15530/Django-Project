@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Category, Goods, Tag
+from drf_extra_fields.fields import Base64ImageField
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -10,8 +11,10 @@ class TagSerializer(serializers.ModelSerializer):
 
 class GoodsSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
-    category = serializers.CharField(source='category.name')
+    image = Base64ImageField(required=False)
+    # category = serializers.CharField(source='category.name')
     # parametr = serializers.CharField(source='parametr.name')
+    parametr = serializers.SerializerMethodField()
 
     class Meta:
         model = Goods
@@ -38,3 +41,11 @@ class CategorySerializer(serializers.ModelSerializer):
     def get_goods_count(self, category):
         count = category.goods.count()
         return count
+
+    def to_internal_value(self, data):
+        name = data.get('name')
+        existing_category = Category.objects.filter(name=name).first()
+
+        if existing_category:
+            return CategorySerializer(existing_category).data
+        return super().to_internal_value(data)

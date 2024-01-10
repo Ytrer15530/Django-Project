@@ -46,6 +46,8 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    path(r'jet/', include('jet.urls', 'jet')),
+    path(r'jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
     path('admin/', admin.site.urls),
     path('api/', include(Router.urls)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
