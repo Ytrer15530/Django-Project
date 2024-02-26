@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import boto3
+from storages.backends.s3boto3 import S3Boto3Storage
 from pathlib import Path
 from datetime import timedelta
 from storages.backends.dropbox import DropboxStorage
@@ -201,3 +203,19 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 JET_DEFAULT_THEME = 'light-violet'
+
+
+AWS_ACCESS_KEY_ID = 'AKIA6GBMFKS6T7ZPN5NR'
+AWS_SECRET_ACCESS_KEY = 'LMk0jnG0Cz9IHb78Xo1KBAMmnINKlb/cC0b61z4R'
+AWS_STORAGE_BUCKET_NAME = 'indus-django'
+
+AWS_S3_REGION_NAME = 'eu-north-1'  # e.g., 'us-west-1'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+class MediaRootS3Boto3Storage(S3Boto3Storage):
+    location = 'media'
+
+
+# Set media file URL
+MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/media/"

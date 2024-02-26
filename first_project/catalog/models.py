@@ -76,3 +76,7 @@ class Goods(DateTimeStamp):
 
     def get_absolute_url(self,):
         return f'/category-list'
+
+
+class YourModel(models.Model):
+    image = models.ImageField(upload_to='images/')
